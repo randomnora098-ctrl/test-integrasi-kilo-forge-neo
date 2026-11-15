@@ -22,9 +22,9 @@ def run_forge_neo():
     print("Menginstall dependensi yang hilang (gradio_rangeslider)...")
     subprocess.run(["pip", "install", "gradio_rangeslider"], check=True)
     
-    # Jalankan launch.py dengan flag skip version check
+    # Jalankan launch.py dengan flag skip version check dan aktifkan akses ekstensi
     print("Menjalankan launch.py...")
-    subprocess.run(["python3", "launch.py", "--share", "--skip-version-check"], check=True)
+    subprocess.run(["python3", "launch.py", "--share", "--skip-version-check", "--enable-insecure-extension-access"], check=True)
 
 if __name__ == "__main__":
     run_forge_neo()
