@@ -1,7 +1,12 @@
 import subprocess
+import os
+
+# Fungsi untuk menjalankan perintah shell
+def run(cmd):
+    subprocess.run(cmd, shell=True, check=True)
 
 # 1. Bersihkan workspace
-subprocess.run(["rm", "-rf", "sd-webui-forge-classic"])
+run("rm -rf sd-webui-forge-classic")
 
 # 2. Jalankan script utama
-subprocess.run(["python3", "test-integrasi-kilo-forge-neo/run_forge.py"])
+run("python3 test-integrasi-kilo-forge-neo/run_forge.py")
