@@ -1,17 +1,23 @@
 import subprocess
 import os
+import shutil
 
 # Fungsi untuk menjalankan perintah shell
 def run(cmd):
-    # Menggunakan shell=True untuk mendukung perintah seperti 'rm -rf'
     subprocess.run(cmd, shell=True, check=True)
 
-# 1. Pastikan kita berada di direktori yang benar (/content)
-os.chdir("/content")
+# 1. Bersihkan workspace untuk Forge (opsional, tergantung kebutuhan)
+if os.path.exists("sd-webui-forge-classic"):
+    shutil.rmtree("sd-webui-forge-classic")
 
-# 2. Bersihkan workspace agar tidak ada sisa folder lama
-run("rm -rf sd-webui-forge-classic")
+# 2. Cek apakah folder repo ada, jika ada lakukan pull, jika tidak clone
+repo_dir = "test-integrasi-kilo-forge-neo"
+if os.path.exists(repo_dir):
+    print("Repositori ditemukan, melakukan update...")
+    subprocess.run(["git", "-C", repo_dir, "pull"], check=True)
+else:
+    print("Repositori tidak ditemukan, melakukan clone...")
+    subprocess.run(["git", "clone", "https://github.com/randomnora098-ctrl/test-integrasi-kilo-forge-neo.git"], check=True)
 
-# 3. Jalankan script utama dari dalam repo
-# Diasumsikan posisi sudah di /content dan repo sudah di-clone
-run("python3 test-integrasi-kilo-forge-neo/run_forge.py")
+# 3. Jalankan script utama
+subprocess.run(["python3", "test-integrasi-kilo-forge-neo/run_forge.py"], check=True)
