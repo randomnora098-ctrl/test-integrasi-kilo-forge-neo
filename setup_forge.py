@@ -17,10 +17,14 @@ def run_forge_neo():
     
     # Pindah ke direktori hasil clone
     os.chdir("sd-webui-forge-classic")
+
+    # Install dependensi yang hilang
+    print("Menginstall dependensi yang hilang (gradio_rangeslider)...")
+    subprocess.run(["pip", "install", "gradio_rangeslider"], check=True)
     
-    # Jalankan launch.py
+    # Jalankan launch.py dengan flag skip version check
     print("Menjalankan launch.py...")
-    subprocess.run(["python3", "launch.py", "--share"], check=True)
+    subprocess.run(["python3", "launch.py", "--share", "--skip-version-check"], check=True)
 
 if __name__ == "__main__":
     run_forge_neo()
