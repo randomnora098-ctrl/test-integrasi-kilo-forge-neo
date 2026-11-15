@@ -11,11 +11,11 @@ def run_forge_neo():
     
     print(f"Memulai setup SD-WebUI Forge branch '{target_branch}'...")
     
-    # Clone repository forge asli
+    # Clone repository forge asli jika belum ada
     if not os.path.exists("sd-webui-forge-classic"):
         subprocess.run(["git", "clone", "-b", target_branch, repo_url, "sd-webui-forge-classic"], check=True)
     
-    # Pindah ke direktori hasil clone
+    # Pindah ke direktori hasil clone (tetap di root agar tidak bersarang)
     os.chdir("sd-webui-forge-classic")
 
     # Install dependensi yang hilang
