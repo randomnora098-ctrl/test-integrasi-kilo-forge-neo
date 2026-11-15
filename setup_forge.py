@@ -1,23 +1,24 @@
 import os
 import subprocess
 
-# Mengarahkan kerja ke folder forge neo
-os.chdir("/home/ryan/Documents/kilo-workspace/forge neo")
-
-# Script ini dirancang untuk menjalankan SD-WebUI Forge (Neo branch)
-# Link repo: https://github.com/Haoming02/sd-webui-forge-classic/tree/neo
-# Pastikan lingkungan Google Colab memiliki dependensi yang diperlukan.
+# Script ini dirancang untuk dijalankan di Google Colab
+# Script ini akan menarik dan menjalankan forge neo langsung dari target repositori
 
 def run_forge_neo():
-    print("Memulai instalasi/setup SD-WebUI Forge (Neo branch)...")
+    # Repository target untuk di-clone
+    repo_url = "https://github.com/Haoming02/sd-webui-forge-classic.git"
+    target_branch = "neo"
     
-    # Clone repository
+    print(f"Memulai setup SD-WebUI Forge branch '{target_branch}'...")
+    
+    # Clone repository forge asli
     if not os.path.exists("sd-webui-forge-classic"):
-        subprocess.run(["git", "clone", "-b", "neo", "https://github.com/Haoming02/sd-webui-forge-classic.git", "sd-webui-forge-classic"], check=True)
+        subprocess.run(["git", "clone", "-b", target_branch, repo_url, "sd-webui-forge-classic"], check=True)
     
+    # Pindah ke direktori hasil clone
     os.chdir("sd-webui-forge-classic")
     
-    # Menjalankan launch.py (asumsi dependensi sudah terinstal atau akan ditangani oleh launch.py)
+    # Jalankan launch.py
     print("Menjalankan launch.py...")
     subprocess.run(["python3", "launch.py", "--share"], check=True)
 
